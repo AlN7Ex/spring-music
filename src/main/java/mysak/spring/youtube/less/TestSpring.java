@@ -7,6 +7,10 @@ public class TestSpring {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("appConfig.xml");
 
         Computer computer = context.getBean("computer", Computer.class);
+
+        System.out.println("Id: " + computer.getId());
+        System.out.println("PC name: " + computer.getName());
+
         computer.playMusic();
 
     }

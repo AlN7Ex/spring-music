@@ -8,5 +8,34 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="mysak.spring.youtube.less"/>
+<!--    <context:component-scan base-package="mysak.spring.youtube.less"/>-->
+
+    <context:property-placeholder location="classpath:computer.properties"/>
+
+    <bean id="rapBean"
+          class="mysak.spring.youtube.less.RapMusic">
+    </bean>
+    <bean id="classicalBean"
+          class="mysak.spring.youtube.less.ClassicalMusic">
+    </bean>
+    <bean id="rockBean"
+          class="mysak.spring.youtube.less.RockMusic">
+    </bean>
+
+    <bean id="musicPlayer"
+          class="mysak.spring.youtube.less.MusicPlayer">
+        <property name="musicList">
+            <list>
+                <ref bean="rapBean"/>
+                <ref bean="classicalBean"/>
+                <ref bean="rockBean"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="computer" class="mysak.spring.youtube.less.Computer">
+        <constructor-arg ref="musicPlayer"/>
+        <property name="name" value="${computer.name}"/>
+        <property name="id" value="${computer.id}"/>
+    </bean>
 </beans>
